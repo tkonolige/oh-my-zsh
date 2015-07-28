@@ -48,8 +48,7 @@ precmd() {
 }
 
 # check for iterm2
-ps -p$PPID -o ppid | tail -1 | xargs ps | tail -1 | grep iTerm2 > /dev/null
-if [ $? -eq 0 ]; then
+if [ -f ~/.iterm2_shell_integration.zsh ]; then
   PROMPT=' '
 else
   PROMPT='> '
