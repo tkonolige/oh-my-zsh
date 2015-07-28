@@ -1,4 +1,3 @@
-
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg svn # You can add hg too if needed: `git hg`
 zstyle ':vcs_info:git*' formats ' %b'
@@ -43,9 +42,15 @@ function box_name {
 }
 
 
+
 precmd() {
-	# Add `%*` to display the time
   print -P '\n$(is_ssh)%{$fg_bold[green]%}%~%{$reset_color%}`git_branch``git_dirty` $username%f'
 }
 
-PROMPT='> '
+# check for iterm2
+ps -p$PPID -o ppid | tail -1 | xargs ps | tail -1 | grep iTerm2
+if [ $? -eq 0 ]; then
+  PROMPT=' '
+else
+  PROMPT='> '
+fi
